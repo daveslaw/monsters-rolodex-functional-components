@@ -1,8 +1,8 @@
 import React from "react";
 import "./card-list.styles.css";
-import CardItem from '../CardItem/CardItem'
+import CardItem from "../CardItem/CardItem";
 
-export default function CardList({monsters}) {
+export default function CardList({ monsters }) {
 	return (
 		<div className="card-list">
 			{monsters.map((monster) => {
