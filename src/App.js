@@ -5,25 +5,32 @@ import SearchBox from "./components/SearchBox/SearchBox";
 
 function App() {
 	console.log("render");
+	
 	const [searchInput, setSearchInput] = useState("");
 	const [monsters, setMonsters] = useState([]);
-	console.log(searchInput);
+	const [filteredMonsters, setFilteredMonsters] = useState(monsters);
 
 	const handleSearch = (event) => {
 		setSearchInput(event.target.value.toLocaleLowerCase());
 	};
 
-	// console.log('render');
 
 	useEffect(() => {
+		console.log('effect is firing');
 		fetch("https://jsonplaceholder.typicode.com/users")
 			.then((response) => response.json())
 			.then((users) => setMonsters(users));
 	}, []);
 
-	const filteredMonsters = monsters.filter((monster) => {
-		return monster.name.toLocaleLowerCase().includes(searchInput);
-	});
+	useEffect(() => {
+		console.log('effect is firing');
+
+		setFilteredMonsters(monsters.filter((monster) => {
+			return monster.name.toLocaleLowerCase().includes(searchInput);
+		}))
+	}, [monsters, searchInput]);
+
+	
 
 	return (
 		<div className="App">
